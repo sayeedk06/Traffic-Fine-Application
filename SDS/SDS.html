@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Software Design Specifications for Traffic Police Application</title>
+    <link rel="stylesheet" href="./styles/styles.css">
+</head>
+
+<body>
+    <div id="left-navbar">
+
+        <ul>
+            <h3>Table of Contents</h3>
+            <li><a href="#introduction">1. Introduction</a> </li>
+        </ul>
+
+        <ul>
+            <li><a href="#ad">2. Architectural Design</a> </li>
+        </ul>
+
+        <ul>
+            <li><a href="#dd">3.1 Database Design</a></li>
+            <li><a href="#td">3.2 Table Description</a></li>
+        </ul>
+
+        <ul>
+            <li><a href="#ucd">4.1 UML Class Diagram</a></li>
+            <li><a href="#cr">4.2 Class Responsibilities</a></li>
+        </ul>
+        <ul>
+            <li><a href="#sd">5. Sequence Diagrams</a></li>
+        </ul>
+
+    </div>
+
+    <div id="sds-body">
+        <!-- title page begins -->
+
+        <hr>
+        <div id="titlepage" class="center">
+            <h1>Software Design Specification</h1>
+            <br>
+            <h3>for</h4>
+                <br>
+                <h2>"Traffic Police App"</h2>
+                <br>
+                <br>
+                <h4>Version 1.0</h4>
+                <br>
+                <h4>Prepared by:</h4>
+                <h4>Sayeed Md. Shaiban - 1621193042</h4>
+                <h4>Atique Hossain - 1530153042</h4>
+                <h4>Ismot Sadik Peyas - 1620156042</h4>
+                <h4>Raisa Mehjabin Azni - 1620216042</h4>
+                <br>
+                <h4>Date: 11.03.2019, Sunday</h4>
+        </div>
+        <hr>
+
+        <!-- title page ends -->
+
+        <!-- section 1 begins  -->
+
+        <div id="introduction">
+            <h2> 1. Introduction</h2>
+            <p>
+            	This document provides an outline for the software structure and design. Using this
+            	document the developers will be able to understand the client requirements. This document also
+            	provides an overview of the database schema, architectural patterns followed and technologies
+            	that are used by the system.
+            </p>
+        </div>
+
+        <!-- section 1 ends -->
+
+        <!-- section 2 starts -->
+
+        <div id="ad">
+            <h2> 2. Architectural Design</h2>
+            <p>
+            	“Traffic Police” application will use the architectural style known as ​ MVC​ . The
+            	Model-View-Controller (MVC)​ is an architectural design that divides an application into three
+            	components: the model, the view and the controller.
+                <ul>
+                    <li><strong>Model: </strong> The Model component corresponds to all the data-related logic that the
+                        user works with.</li>
+                    <li><strong>View: </strong>The View component is used for all the UI logic of the application.</li>
+                    <li><strong>Controller: </strong>The Controller component acts as an interface between Model and
+                        View components to process all the business logic and incoming requests, manipulate data using
+                        the Model component and interact with the Views to render the final output.</li>
+                </ul>
+            </p>
+        </div>
+
+        <!-- section 2 ends -->
+
+        <!-- section 3 begins -->
+        <div id="dd">
+            <h2>3.1 Database Design</h2>
+
+            <p>
+                We will be using Sqlite for the database with the folowing entitity and attributes:
+            </p>
+
+            	<img src="./images/ER.png" alt="" srcset="">
+
+
+            	<p>
+                <ul>
+                    <li> We have two entities:
+                        <ul>
+                            <li><strong>User: </strong>
+                                This table will contain the email,name and password of both the admin and police. User will be verified via these datas.
+                            </li> <br>
+                            <li><strong>Fine: </strong>
+                                This table will contain the amount of fine assigned. The number plate against which this amount is assigned. And the email of the police who assigned it.
+                            </li> <br>
+                        </ul>
+               				 And from the diagram we can see that only the "Assigns" relationship exist between the two table.
+                    </li>
+
+                </ul>
+
+            </p>
+        </div>
+
+        <div id="td">
+            <h2>3.2 Table Description</h2>
+    		<!-- Still to be added -->
+        </div>
+        <!-- section 3 ends -->
+
+        <!-- section 4 begins -->
+        <div id="ucd">
+            <h2>4.1 UML Class Diagram</h2>
+            <p>
+                <img src="./images/umlclass.jpg" alt="" srcset="">
+            </p>
+        </div>
+
+        <div id="cr">
+            <h2>6.2 Class Responsibilities</h2>
+            <p>
+                Below we describe the responsibilities of each of the classes in a single line:
+
+                <table>
+                    <thead>
+                        <tr>
+                            <td>Name</td>
+                            <td>Responsibility</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>User</td>
+                            <td>Superclass for both admin and police. Contains their common information </td>
+                        </tr>
+                        <tr>
+                            <td>Admin</td>
+                            <td>Can add new police to the application. And monitor them</td>
+                        </tr>
+                        <tr>
+                            <td>Police</td>
+                            <td>Takes picture/scans number plate of cars and assigns fine against the designated number plate</td>
+                        </tr>
+                        <tr>
+                            <td>Login</td>
+                            <td>Authorizes user with credentials that match the database</td>
+                        </tr>
+                        <tr>
+                            <td>Scan</td>
+                            <td>Detects the number from number plates</td>
+                        </tr>
+                        <tr>
+                            <td>Fine</td>
+                            <td>Assigns fine chosen by the police against the number plate</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </p>
+        </div>
+
+        <!-- section 4 ends -->
+
+        <!-- section 5 begins -->
+
+     
+
+        <div id="sd">
+            <h2>5. Sequence Diagrams</h2>
+            <p>
+                This section will list the possible sequence of actions that we anticipate the system will need to perform in order to accomplish a task it is designed to do. We list a few UML Sequence Diagrams that will help the reader understand what's going on under the hood.
+            </p>
+            <img src="./images/login.png" alt="" class="sequencediagram">
+
+            <img src="./images/fine.png" alt="" class="sequencediagram">
+            <br>
+
+            
+        </div>
+       <!-- section 5 ends -->
+    </div>
+</body>
+
+</html>
