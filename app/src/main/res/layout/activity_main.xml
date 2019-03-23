@@ -57,7 +57,8 @@
                         android:src="@drawable/camera"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
-                    <TextView
+                    <Button
+                        android:id="@+id/captureImage"
                         android:text="Camera"
                         android:textAlignment="center"
                         android:textColor="@android:color/black"
