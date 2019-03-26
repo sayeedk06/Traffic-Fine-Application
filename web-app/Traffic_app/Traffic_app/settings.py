@@ -27,6 +27,10 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+#social auth configuration
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY ='644286618619-dbr70l5nsn22bfcvdicuugrqkf8dm678.apps.googleusercontent.com'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'LHS283uWkD6u-O9_HsCjdPPq'
+SOCIAL_AUTH_URL_NAMESPACE = 'social'
 
 # Application definition
 
@@ -37,6 +41,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'social_django',
+    'user',
 ]
 
 MIDDLEWARE = [
@@ -54,7 +60,7 @@ ROOT_URLCONF = 'Traffic_app.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -69,14 +75,31 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'Traffic_app.wsgi.application'
 
+"""
+using Google accounts to establish the authentication,
+so adding the Google OAuth2 backend to the list of authentication backends.
+Also, including explicitly the default model authentication backend
+in order to continue using the django admin site using local accounts
+"""
+AUTHENTICATION_BACKENDS = (
+    'social_core.backends.google.GoogleOAuth2',
+    'social_core.backends.open_id.OpenIdAuth',  # for Google authentication
+    'social_core.backends.google.GoogleOpenId',  # for Google authentication
 
+    'django.contrib.auth.backends.ModelBackend',
+)
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
-
+"""
+mysql database used with password admin and name trafficappdb.
+This is where the connection parameter is declared
+"""
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'trafficappdb',
+        'USER':'root',
+        'PASSWORD':'admin',
     }
 }
 
@@ -113,6 +136,10 @@ USE_L10N = True
 
 USE_TZ = True
 
+LOGIN_URL = 'login'
+
+LOGIN_REDIRECT_URL = 'home'
+# LOGOUT_REDIRECT_URL = 'logout'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
