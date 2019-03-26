@@ -3,10 +3,13 @@ from django.urls import path,include
 from django.contrib.auth import views
 from . import views
 
+
+# This contains the url patterns that will be used by user
+# to move from one page to another
+
 urlpatterns = [
-    path('auth/', include('social_django.urls', namespace='social')),
-    # path('login/', views.login, name='login'),
-    path('logout/', views.logout, name='logout'),
-    path("", views.index, name='index'),
-    path("profile/", views.profile, name='profile'),
+    path('auth/', include('social_django.urls', namespace='social')), #url for fid or oauth registration
+    path('logout/', views.user_logout, name='logout'), #url pointing to the logout function in views.py
+    path("", views.index, name='index'), #url pointing to the index function in views.py. Which alsp contains the login functionality
+    path("profile/", views.profile, name='profile'), #url pointing to the profile funtion in views.py
 ]
