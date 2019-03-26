@@ -1,9 +1,12 @@
 from django.shortcuts import render,redirect
 from django.contrib.auth import authenticate,login,logout
 from django.contrib import messages
-# Create your views here.
-# def index(request):
-# 	return render(request, 'user/index.html')
+
+
+#index function starts here.
+"""Takes in the username and password from the login form in index.html
+and checks if the user exists. If yes, takes to the profile.html page. If not, shows
+error message"""
 
 def index(request):
 	if(request.method == "POST"):
@@ -21,10 +24,17 @@ def index(request):
 	else:
 			return render(request,'user/index.html')
 
-def logout(request):
-    logout(request)
-    messages.success(request,('You have been logged out..'))
-    return redirect('index')
+#index function ends here.
 
+# logout function starts here
+"""default Django function for logging out"""
+def user_logout(request):
+	logout(request)
+	messages.success(request,("You have been logged out.."))
+	return redirect('index')
+# logout function ends here
+
+# profile function starts here
 def profile(request):
     return render(request,'user/profile.html')
+# profile function ends here

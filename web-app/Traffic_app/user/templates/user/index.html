@@ -1,7 +1,9 @@
 {% extends 'base.html' %}
-
+{% load staticfiles %}
+<link rel="stylesheet" href="/user/bootstrap-social.css">
 {% block content %}
 
+<!-- login form starts here -->
 <div class="container">
 	<div class="row" style= "height: 100px;"></div>
 	<div class="col-md-6 offset-md-3 alert alert-success" >
@@ -20,8 +22,9 @@
 		</form>
     <br>
     <p><strong>-- OR --</strong></p>
-  <a href="{% url 'social:begin' 'google-oauth2' %}">Login with Google</a><br>
+  <!-- <a class="btn-primary" href="{% url 'social:begin' 'google-oauth2' %}">Login</a><br> -->
+		<a class="btn btn-danger" href="{% url 'social:begin' 'google-oauth2' %}" role="button">Login with Google</a>
 	</div>
 </div>
-
+<!-- login form ends here -->
 {% endblock %}
