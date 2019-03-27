@@ -1,7 +1,7 @@
 from django.shortcuts import render,redirect
 from django.contrib.auth import authenticate,login,logout
 from django.contrib import messages
-
+from django.contrib.auth.decorators import login_required
 
 #index function starts here.
 """Takes in the username and password from the login form in index.html
@@ -35,6 +35,7 @@ def user_logout(request):
 # logout function ends here
 
 # profile function starts here
+@login_required
 def profile(request):
     return render(request,'user/profile.html')
 # profile function ends here
