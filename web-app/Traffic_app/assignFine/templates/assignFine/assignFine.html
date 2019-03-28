@@ -1,18 +1,17 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block content %}
 
 
 <div class="container emp-profile">
-            <form method="post">
                 <div class="row">
                     <div class="col-md-4">
                         <div class="profile-img">
-                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS52y5aInsxSm31CvHOFHWujqUx_wWTS9iM6s7BAm21oEN_RiGoog" alt=""/>
-                            <div class="file btn btn-lg btn-primary">
+                            <img src="{% static "user/images/police.jpg" %}" alt="Police profile picture"/>
+                            <!-- <div class="file btn btn-lg btn-primary">
                                 Change Photo
                                 <input type="file" name="file"/>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -23,39 +22,24 @@
                                     <h6>
                                       Goverment Employee
                                     </h6>
-                                    <!-- <p class="proile-rating">RANKINGS : <span>8/10</span></p> -->
-                            <ul class="nav nav-tabs" id="myTab" role="tablist">
-                                <li class="nav-item">
-                                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#upload-picture" role="tab" aria-controls="home" aria-selected="true">Upload Picture</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#assign-Fine" role="tab" aria-controls="profile" aria-selected="false">Assign fine</a>
-                                </li>
-                            </ul>
+                                    <form action="{% url 'assignFine' %}" method="post" enctype="multipart/form-data">
+                                      {% csrf_token %}
+                                    <input type="file" name="myfile">
+                                    <div class="form-group">
+                              				<label for="exampleInputamount">BDT</label>
+                              				<input type="number" step="any" class="form-control" placeholder="amount" name="amount">
+                              			</div>
+                                    <button type="submit">Upload</button>
+                                  </form>
                         </div>
+                        {% if uploaded_file_url %}
+                          <p>File uploaded at: <a href="{{ uploaded_file_url }}">{{ uploaded_file_url }}</a></p>
+                        {% endif %}
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-4">
-                    </div>
-                    <div class="col-md-8">
-                        <div class="tab-content profile-tab" id="myTabContent">
-                          <div class="tab-pane fade show active" id="upload-picture" role="tabpanel" aria-labelledby="home-tab">
-                          <form method="POST">
-                            <input type="file" name="pic" accept="image/*">
-                          </div>
-                          <div class="tab-pane fade show active" id="assign-Fine" role="tabpanel" aria-labelledby="home-tab">
-                            <div class="form-group">
-                      				<label for="forInputFine">BDT</label>
-                      				<input type="number" class="form-control" placeholder="amount" name="fine">
-                      			</div>
-                            <button type="submit" class="btn btn-success">Submit</button>
-                          </div>
-                        </form>
-                        </div>
-                    </div>
+                  </div>
 
-            </form>
-        </div>
+                </div>
+
+
 
 {% endblock %}

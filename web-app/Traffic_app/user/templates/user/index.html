@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
-{% load staticfiles %}
-<link rel="stylesheet" href="/user/bootstrap-social.css">
+{% load static %}
+
 {% block content %}
 
 <!-- login form starts here -->
@@ -23,7 +23,11 @@
     <br>
     <p><strong>-- OR --</strong></p>
   <!-- <a class="btn-primary" href="{% url 'social:begin' 'google-oauth2' %}">Login</a><br> -->
-		<a class="btn btn-danger" href="{% url 'social:begin' 'google-oauth2' %}" role="button">Login with Google</a>
+		<a class="btn btn-social btn-google" href="{% url 'social:begin' 'google-oauth2' %}" role="button">
+				<span class="fab fa-google-plus fa-2x" style="color:white;"></span>Login with Google</a>
+
+
+
 	</div>
 </div>
 <!-- login form ends here -->
