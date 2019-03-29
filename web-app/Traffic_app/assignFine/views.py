@@ -5,6 +5,8 @@ from django.core.files.storage import FileSystemStorage
 import os
 from google.cloud import vision
 import io
+from .forms import FineForm
+from .models import Fine
 # Create your views here.
 
 @login_required
@@ -15,7 +17,7 @@ def fine(request):
         fs = FileSystemStorage()
         filename = fs.save(uploaded_file.name, uploaded_file)
         uploaded_file_url = fs.url(filename)
-        # BASE = os.path.join(settings.MEDIA_ROOT,str(uploaded_file.name)
+
         client = vision.ImageAnnotatorClient()
         path = "media/"+uploaded_file.name
         with io.open(path, 'rb') as image_file:
@@ -26,12 +28,12 @@ def fine(request):
         response = client.text_detection(image=image,image_context=image_context)
         texts = response.text_annotations
         print('Texts:')
-        for text in texts:
-            print('\n"{}"'.format(text.description))
-
-
-
-
+        num = 0
+        for text in texts[:1]:
+            # print('\n"{0}"'.format(text.description))
+            num = text.description
+        form = Fine(amount=request.POST['amount'],numberPlate=num)
+        form.save()
 
 
 
