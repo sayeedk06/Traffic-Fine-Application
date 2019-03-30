@@ -2,6 +2,7 @@ from django.shortcuts import render,redirect
 from django.contrib.auth import authenticate,login,logout
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from assignFine.models import Fine
 
 #index function starts here.
 """Takes in the username and password from the login form in index.html
@@ -26,16 +27,27 @@ def index(request):
 
 #index function ends here.
 
+
 # logout function starts here
-"""default Django function for logging out"""
+"""default Django function for logging out and the built in django message
+functionality"""
 def user_logout(request):
 	logout(request)
 	messages.success(request,("You have been logged out.."))
 	return redirect('index')
 # logout function ends here
 
+
 # profile function starts here
+"""profile function displays the profile.html page and passes the values
+from Fine model in model.py and filters the values according to the
+current user logged in"""
 @login_required
 def profile(request):
-    return render(request,'user/profile.html')
+	assignHis = Fine.objects.filter(policeUsername=request.user)
+	return render(request,'user/profile.html', {
+
+		'assignHis':assignHis
+
+		})
 # profile function ends here

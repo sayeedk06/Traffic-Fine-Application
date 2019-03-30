@@ -13,6 +13,7 @@
     <!-- <link rel="stylesheet" href="/user/profile.css"> -->
     <link rel="stylesheet" href="{% static "/user/bootstrap-social.css" %}">
 
+<!-- css code starts here -->
 
     <style>
     body{
@@ -112,9 +113,12 @@
 }
     </style>
 
+<!--- css code ends here --->
+
     <title>Traffic Application</title>
   </head>
   <body>
+
     <!-- NAVBAR STARTS HERE -->
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-success">
@@ -163,6 +167,19 @@
     {% block content%}
 
     {% endblock %}
+
+
+    <!-- Footer starts here-->
+    <footer class="page-footer font-small blue">
+
+      <!-- Copyright -->
+      <div class="footer-copyright text-center py-3">© 2019 Copyright:
+        <a href="{% url 'index'%}">CSE 327</a>
+      </div>
+      <!-- Copyright ends here-->
+
+    </footer>
+    <!-- Footer -->
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.contrib.auth.decorators import login_required
 from django.conf import settings
 from django.core.files.storage import FileSystemStorage
@@ -7,17 +7,30 @@ from google.cloud import vision
 import io
 from .forms import FineForm
 from .models import Fine
-# Create your views here.
+from django.contrib import messages
 
+# fine function starts here
+"""The following fine function at first recieves the images given by the user
+and saves it to the media folder. That using google-vision api detects the
+text from the number plate and saves it to the num variable,assigned inside
+the for loop and finally saves the amount,the text detected from the picture
+and the current user. And then it removes image from the media folder
+as there is no need for the image anymore.
+"""
 @login_required
 def fine(request):
     if request.method == 'POST' and request.FILES['myfile']:
+
+
+        # upload file to media folder starts here
         uploaded_file = request.FILES['myfile']
-        # print(uploaded_file.name)
+
         fs = FileSystemStorage()
         filename = fs.save(uploaded_file.name, uploaded_file)
         uploaded_file_url = fs.url(filename)
+        #upload files to media folder ends here
 
+        #google-vision api text detection starts here
         client = vision.ImageAnnotatorClient()
         path = "media/"+uploaded_file.name
         with io.open(path, 'rb') as image_file:
@@ -32,14 +45,30 @@ def fine(request):
         for text in texts[:1]:
             # print('\n"{0}"'.format(text.description))
             num = text.description
-        form = Fine(amount=request.POST['amount'],numberPlate=num)
-        form.save()
+
+        #google-vision text detection ends here
+        #saving number from number plate and amount assigned to the database starts here
+        if 'amount' in request.POST and request.POST['amount']:
+            form = Fine(amount=request.POST['amount'],numberPlate=num,policeUsername=request.user)
+            form.save()
+
+        else:
+            os.remove(os.path.join(settings.MEDIA_ROOT,str(uploaded_file.name) ))
+            messages.success(request,('Invalid Field....'))
+            return redirect('assignFine')
 
 
 
+
+        #saving number ends here
+
+        # removes uploaded image from the media folder
         os.remove(os.path.join(settings.MEDIA_ROOT,str(uploaded_file.name) ))
-        return render(request, 'user/profile.html', {
-            'uploaded_file_url': uploaded_file_url
-        })
+        messages.success(request,('Fine assigned successffully....'))
+        return redirect('profile')
+            # 'uploaded_file_url': uploaded_file_url)
     else:
+        messages.success(request,('Upload valid image and assign fine....'))
         return render(request,'assignFine/assignFine.html')
+
+# fine function ends here

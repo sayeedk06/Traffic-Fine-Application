@@ -5,4 +5,4 @@ class FineForm(forms.ModelForm):
     amount = forms.IntegerField()
     class Meta:
         model = Fine
-        fields = ('amount','numberPlate',)
+        fields = ('amount','numberPlate','policeUsername')

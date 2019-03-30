@@ -1,4 +1,4 @@
 from django.contrib import admin
 from .models import Fine
-# Register your models here.
+# Registered fine model here to show in the admin panel
 admin.site.register(Fine)
