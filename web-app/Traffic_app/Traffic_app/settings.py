@@ -44,6 +44,8 @@ INSTALLED_APPS = [
     'social_django',
     'user',
     'assignFine',
+    'rest_framework',
+    'api',
 ]
 
 MIDDLEWARE = [
