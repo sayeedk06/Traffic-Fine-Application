@@ -25,11 +25,13 @@
                                     <form action="{% url 'assignFine' %}" method="post" enctype="multipart/form-data">
                                       {% csrf_token %}
                                     <input class="btn-primary" type="file" name="myfile">
-                                    <div class="form-group">
+
+                                          {{forms.as_p}}
+                                    <!-- <div class="form-group">
                                         <br>
                               				<label for="exampleInputamount">BDT</label>
                               				<input type="number" step="any" class="form-control" placeholder="amount" name="amount">
-                              			</div>
+                              			</div> -->
                                     <button class="btn btn-social btn-primary" type="submit">
 
                                     <i class="fas fa-file-invoice"></i>Submit</button>
