@@ -103,7 +103,8 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'trafficappdb',
         'USER':'root',
-        'PASSWORD':'admin',
+        'PASSWORD':'',
+        'OPTIONS': {'charset': 'utf8mb4'},
     }
 }
 
