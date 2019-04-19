@@ -32,4 +32,4 @@ class TestCase(TestCase):
 
             response = self.client.get(self.history_url)
             self.assertEquals(response.status_code,200)
-        # self.assertTemplateUsed(response,'user/profile')
+            self.assertTemplateUsed(response,'user/profile.html')
