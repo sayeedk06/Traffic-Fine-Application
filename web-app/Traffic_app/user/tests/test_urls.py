@@ -6,6 +6,7 @@ class TestUrls(SimpleTestCase):
     """docstring for."""
     def test_index_url_resolved(self):
         url = reverse('index')
+        # print(url)
         self.assertEquals(resolve(url).func,index)
 
     def test_logout_url_resolved(self):
