@@ -3,7 +3,7 @@ from django.urls import reverse, resolve
 from user.views import index,user_logout,profile
 
 class TestUrls(SimpleTestCase):
-    """docstring for."""
+    """checks to see if the functions in user.views.py uses the correct url """
     def test_index_url_resolved(self):
         url = reverse('index')
         # print(url)
